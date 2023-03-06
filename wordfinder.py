@@ -18,6 +18,7 @@ class WordFinder:
     """
     
     def __init__(self,path):
+
         """set path to link specified in function """
         self.path = path
         """open file and save to words"""
@@ -29,6 +30,10 @@ class WordFinder:
         """close file after reading"""
         words.close()
         print (f"{len(self.words)} words read")
+
+    def __repr__(self):
+        """Show self representation"""
+        return f"<WordFinder file_path={self.path}"
         
     def random(self):
         """pick a random word in path"""
