@@ -21,16 +21,20 @@ class SerialGenerator:
     """
     def __init__(self, start):
         """Defines starting number"""
-        self.start = start-1
+        self.start = self.next = start
+
+    def __repr__(self):
+        """Show self representation"""
+        return f"<SerialGenerator start={self.start} next={self.next}"
 
     def generate(self):
         """Everytime function is called, increase number by one"""
-        self.start = self.start+1
-        return self.start
+        self.next = self.next+1
+        return self.next-1
 
     def reset(self):
         """Resets the number to starting number"""
-        self.start = 99
+        self.next = self.start
 
 
         

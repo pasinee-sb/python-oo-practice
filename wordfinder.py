@@ -2,29 +2,45 @@
 import random
 
 class WordFinder:
-    """FIND WORDS IN A FILE"""
+    """Machine for finding random words from dictionary.
+    
+    >>> wf = WordFinder("simple.txt")
+    3 words read
+
+    >>> wf.random() in ["cat", "dog", "porcupine"]
+    True
+
+    >>> wf.random() in ["cat", "dog", "porcupine"]
+    True
+
+    >>> wf.random() in ["cat", "dog", "porcupine"]
+    True
+    """
     
     def __init__(self,path):
-        """DIRECT TO PATH. OPEN AND READ WORDS IN THE PATH"""
+        """set path to link specified in function """
         self.path = path
+        """open file and save to words"""
         words = open(self.path, "r")
-        read_words = words.read()
+        """set words read in file in words prop"""
+        self.words = words.read()
+        """set all_words prop to list of string where each word is split by whitespaces """
+        self.all_words = list(map(str,self.words.split()))
+        """close file after reading"""
         words.close()
-        print (f"{len(read_words)} words read")
+        print (f"{len(self.words)} words read")
         
-        
-    def read(self):
-        """READ WORDS AND RETURN ALL THE WORDS READ"""
-        words = open(self.path, "r")
-        read_words = words.read()
-        all_words = list(map(str,read_words.split()))
-        return all_words
-        words.close()
-        
-    
     def random(self):
         """pick a random word in path"""
-        return random.choice(self.read())
+        return random.choice(self.all_words)
+
+class SpecialWordFinder(WordFinder):
+    def __init__(self,path):
+        super().__init__(path)
+    def random(self):
+        self.all_words = [word for word in self.words.split() if word[0]!= "#"]
+        return random.choice(self.all_words)
+
 
     
     
